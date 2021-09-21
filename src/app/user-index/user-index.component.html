@@ -1,7 +1,68 @@
 <div class="container">
     <div class="card">
+        <h2>Users</h2>
         <div class="card-body">
-          This is some text within a card body.
+
+            <div class="card">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Member</th>
+                            <th scope="col">First</th>
+                            <th scope="col">Last</th>
+                            <th scope="col">Handle</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row" style="font-weight: 100;">
+                                <img src="../../assets/cat2.jpg" class="rounded " alt="..." width="50" height="50">
+                                Chard
+                            </th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">
+                                <img src="../../assets/cat2.jpg" class="rounded " alt="..." width="50" height="50">
+                                Chard
+                            </th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">
+                                <img src="../../assets/cat2.jpg" class="rounded " alt="..." width="50" height="50">
+                                Chard
+                            </th>
+                            <td>Larry</td>
+                            <td>the Bird</td>
+                            <td>@twitter</td>
+                          </tr>
+                        </tbody>
+                    </table>
+                  </div>
+            </div>
+
+            <div class="card">
+                <div style="margin-top: 20px;">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-start" *ngFor="let u of users; let i = index; trackBy: trackByFunc;">
+                            <img [src]="u.image" class="rounded " alt="..." width="50" height="50">
+                            <div class="ms-2 me-auto">
+                              <div class="fw-bold">{{u.firstName}}  {{u.lastName}}</div>
+                              <div>TEST test test</div>
+                              <div>TEST test test</div>
+                            </div>
+                            <!-- <span class="badge bg-primary rounded-pill">14</span> -->
+                            <i class="bi bi-pen" style="margin-right: 10px;"></i>
+                            <i class="bi bi-trash" style="margin-right: 10px;"></i>
+                        </li>
+                      </ul>
+                </div>
+            </div>
         </div>
-    </div>
 </div>

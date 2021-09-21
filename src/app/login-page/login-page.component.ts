@@ -9,17 +9,27 @@ import { Router } from '@angular/router';
 export class LoginPageComponent implements OnInit {
 
   isLogin = true;
+  isLoggingIn = false;
+  loginLabel = 'LOGIN'
 
   constructor(private router: Router) { }
 
   ngOnInit(): void {
     if (this.isLogin)
       console.log('logged in');
-      // route to user 
+      // route to user
   }
 
   login() {
-    this.router.navigate(['home']);
+    this.loginLabel = 'LOGGING IN'
+    this.isLoggingIn = !this.isLoggingIn
+    var login = this;
+    setTimeout(function() {
+
+      login.isLoggingIn = !login.isLoggingIn;
+      login.router.navigate(['home']);
+    },1500);
+    
   }
 
 }

@@ -11,7 +11,38 @@
             <label for="floatingPassword">Password</label>
         </div>
         <div class="login-btn">
-            <button type="button" class="btn btn-outline-primary" (click)="login()">Login</button>
+            <button type="button" class="btn btn-outline-primary" (click)="login()" [disabled]="isLoggingIn">
+                {{loginLabel}}             
+                <div class="login-loading" *ngIf="isLoggingIn">
+                    <div class="spinner-grow text-primary login-spinner" role="status" >
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-secondary login-spinner" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-success login-spinner" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-danger login-spinner" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-warning login-spinner" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-info login-spinner" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <!-- <div class="spinner-grow text-light login-spinner" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                    </div> -->
+                    <div class="spinner-grow text-dark login-spinner" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </button>
         </div>
+
+
+
     </div>
 </div>

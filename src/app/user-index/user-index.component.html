@@ -1,53 +1,49 @@
 <div class="container">
     <div class="card">
         <h2>Users</h2>
+        <button type="button" style="margin-right: 0.9rem;" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Remove" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <i class="bi bi-add-fill"></i> Add user
+        </button>
         <div class="card-body">
 
             <div class="card">
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table itm-table">
                         <thead>
                           <tr>
                             <th scope="col">Member</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
+                            <th scope="col">Email</th>
+                            <th>&nbsp;</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <th scope="row" style="font-weight: 100;">
-                                <img src="../../assets/cat2.jpg" class="rounded " alt="..." width="50" height="50">
-                                Chard
-                            </th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">
-                                <img src="../../assets/cat2.jpg" class="rounded " alt="..." width="50" height="50">
-                                Chard
-                            </th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">
-                                <img src="../../assets/cat2.jpg" class="rounded " alt="..." width="50" height="50">
-                                Chard
-                            </th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
+                          <tr *ngFor="let u of users; let i = index; trackBy: trackByFunc;">
+                            <td>
+                                <!-- <img src="../../assets/cat2.jpg" class="rounded " alt="..." widtd="50" height="50">
+                                Chard -->
+                                <img [src]="u.image" alt="">
+                                <a href="#" class="user-link">{{u.firstName}} {{u.lastName}}</a>
+                                <span class="user-subhead">Admin</span>
+                            </td>
+                            <td>Mark@email.com</td>
+                            <td style="width: 20%;">
+                              <button type="button" style="margin-right: 0.9rem;" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
+                                <i class="bi bi-pen-fill"></i>
+                              </button>
+                              <button type="button" style="margin-right: 0.9rem;" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Remove">
+                                <i class="bi bi-trash-fill"></i>
+                              </button>
+                              <button type="button" style="margin-right: 0.9rem;" class="btn btn-light" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View">
+                                <i class="bi bi-arrow-right"></i>
+                              </button>
+                            </td>
                           </tr>
                         </tbody>
                     </table>
                   </div>
             </div>
 
-            <div class="card">
+            <!-- <div class="card">
                 <div style="margin-top: 20px;">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item d-flex justify-content-between align-items-start" *ngFor="let u of users; let i = index; trackBy: trackByFunc;">
@@ -57,12 +53,50 @@
                               <div>TEST test test</div>
                               <div>TEST test test</div>
                             </div>
-                            <!-- <span class="badge bg-primary rounded-pill">14</span> -->
+                            <span class="badge bg-primary rounded-pill">14</span>
                             <i class="bi bi-pen" style="margin-right: 10px;"></i>
                             <i class="bi bi-trash" style="margin-right: 10px;"></i>
                         </li>
                       </ul>
                 </div>
+            </div> -->
+
+
+            <div class="modal" tabindex="-1" id="exampleModal">
+              <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">First Name</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                      </div>
+                      <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Last Name</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                      </div>
+                      <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Email</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                      </div>
+                      <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Password</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" (click)="addUser($event, 'clicked')">Create User</button>
+                  </div>
+                </div>
+              </div>
             </div>
+
+
         </div>
 </div>

@@ -1,0 +1,25 @@
+.itm-table tbody td > img {
+    position: relative;
+	max-width: 50px;
+	float: left;
+	margin-right: 15px;
+}
+
+.table tbody > tr > td {
+	font-size: 0.875em;
+	// background: #f5f5f5;
+	// border-top: 10px solid #fff;
+	vertical-align: middle;
+	padding: 12px 8px;
+}
+
+.itm-table tbody td .user-link {
+	display: block;
+	font-size: 1.25em;
+	padding-top: 3px;
+	margin-left: 60px;
+}
+.itm-table tbody td .user-subhead {
+	font-size: 0.875em;
+	font-style: italic;
+}

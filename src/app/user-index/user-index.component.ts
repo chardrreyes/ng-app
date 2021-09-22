@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from './user.model';
 
 @Component({
@@ -10,7 +11,7 @@ export class UserIndexComponent implements OnInit {
 
   users: User[] = [];
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.users.push(
@@ -47,6 +48,10 @@ export class UserIndexComponent implements OnInit {
         image: '../../assets/cat4.jpg'
       }
     )
+  }
+
+  addUser(event: any, test: any) {
+    console.log(event, test);
   }
 
   trackByFunc(index: any, value: any) {

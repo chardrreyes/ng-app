@@ -9,8 +9,8 @@ const routes: Routes = [
   {path: 'home', component: UserIndexComponent},
   {path: ':userId/view', component: UserEditComponent},
   // Path not found
-  {path: '404', component: UserIndexComponent},
-  {path: '**', redirectTo: '/404'}
+  // {path: '404', component: UserIndexComponent},
+  // {path: '**', redirectTo: '/404'}
 ];
 
 @NgModule({

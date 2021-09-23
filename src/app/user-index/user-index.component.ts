@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from './user.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserService } from '../shared/user.service';
 
 @Component({
   selector: 'app-user-index',
@@ -10,9 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./user-index.component.scss']
 })
 
-
 export class UserIndexComponent implements OnInit {
-
   users: User[] = [];
   userForm = new FormGroup({
     firstName: new FormControl('',[Validators.required]),
@@ -21,61 +20,55 @@ export class UserIndexComponent implements OnInit {
     password: new FormControl('',[Validators.required]),
   });
 
-  constructor(private router: Router, private snackBar: MatSnackBar) { }
+  constructor(private router: Router, private snackBar: MatSnackBar, private userService: UserService) { }
 
   ngOnInit(): void {
-    this.users.push(
-      {
-        id: 1,  
-        firstName: 'Gheorge',
-        lastName: 'Strega',
-        email: 'gstreg@email.com',
-        password: 'qweasdzxc',
-        image: '../../assets/cat1.jpg'
-      },
-      {
-        id: 2,  
-        firstName: 'Aqua',  
-        lastName: 'Reyes',  
-        email: 'areyes@email.com',  
-        password: 'qweasdzxc',
-        image: '../../assets/cat2.jpg'
-      },
-      {
-        id: 3,  
-        firstName: 'Mimi',  
-        lastName: 'Santos',  
-        email: 'mimisantos@email.com',  
-        password: 'qweasdzxc',
-        image: '../../assets/cat3.jpg'
-      },
-      {
-        id: 4,  
-        firstName: 'Comet',  
-        lastName: 'Delosantos',  
-        email: 'cdelosantos@email.com',  
-        password: 'qweasdzxc',
-        image: '../../assets/cat4.jpg'
+    this.userService.getAllUser().subscribe(
+      (data: any) => {
+        this.users = data;
+        const role = JSON.parse(localStorage.getItem('user') || '{}');
+        if(role.id) {
+          if(role.role == 0) {
+            // route to own detail page
+            this.router.navigate([role.id + '/view'])
+          }
+        } else {
+          this.router.navigate([role.id + '/view'])
+        }
       }
-    )
+    );
   }
 
   addUser() {
     // secondary validation
     if(this.userForm.valid) {
-      console.warn(this.userForm.value);
       const user = this.userForm.value;
+      user.role = 0;
       this.users.push(user);
-      //clear form
-      this.userForm.reset();
-    } else {
-      console.log('not valid')
-      this.openSnackBar('Please fill up the required field.', 'Ok');
+      // call api
+      this.userService.insertUser(user);
+      // clear form
+      this.router.navigate(['home']);
     }
   }
 
-  removeUser(id: number) {
-    this.users.splice(id, 1);
+  viewUser(index: number) {
+    const uid = this.users[index].id;
+    this.router.navigate([uid + '/view']);
+  }
+
+  removeUser(index: number) {
+    const uid = this.users[index].id;
+    this.users.splice(index, 1);
+    // remove user using api
+    this.userService.deleteUser(uid).subscribe(
+      (data) => {
+        console.log(data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
   }
 
   openSnackBar(message: string, action: string) {
@@ -85,9 +78,11 @@ export class UserIndexComponent implements OnInit {
   validate(){
     var form = document.getElementsByClassName('needs-validation')[0] as HTMLFormElement;
     if (form.checkValidity() === false) {
-      this.addUser()
+      form.classList.add('was-validated');
+
     } else {
       form.classList.add('was-validated');
+      this.addUser();
     }
     
   } 

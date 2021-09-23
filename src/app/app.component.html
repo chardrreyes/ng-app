@@ -1,13 +1,10 @@
-
-
 <div class="container" style="max-width: 50rem; padding: 2rem; flex-direction: column; height: 1000px !important; width: 100%; display: flex; text-align: center;">
-  <header class="mb-auto">
+  <header class="mb-auto mb-custom">
     <div>
       <h3 class="float-md-start mb-0">App Login</h3>
       <nav class="nav nav-masthead justify-content-center float-md-end">
-        <a class="nav-link active" aria-current="page" href="#">Home</a>
-        <a class="nav-link" href="#">Features</a>
-        <a class="nav-link" href="#">Contact</a>
+        <a class="nav-link active" aria-current="page" href="#" [routerLink]="'home'">Home</a>
+        <a class="nav-link active" aria-current="page" href="#" (click)="logout()" *ngIf="isLoggedIn">Logout</a>
       </nav>
     </div>
   </header>

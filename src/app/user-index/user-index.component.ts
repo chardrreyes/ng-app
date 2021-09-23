@@ -23,18 +23,18 @@ export class UserIndexComponent implements OnInit {
   constructor(private router: Router, private snackBar: MatSnackBar, private userService: UserService) { }
 
   ngOnInit(): void {
+    const role = JSON.parse(localStorage.getItem('user') || '{}');
+    if(role.id) {
+      if(role.role == 0) {
+        // route to own detail page
+        this.router.navigate([role.id + '/view'])
+      }
+    } else {
+      this.router.navigate([role.id + '/view'])
+    }
     this.userService.getAllUser().subscribe(
       (data: any) => {
         this.users = data;
-        const role = JSON.parse(localStorage.getItem('user') || '{}');
-        if(role.id) {
-          if(role.role == 0) {
-            // route to own detail page
-            this.router.navigate([role.id + '/view'])
-          }
-        } else {
-          this.router.navigate([role.id + '/view'])
-        }
       }
     );
   }

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../shared/user.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../user-index/user.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-edit',
@@ -17,7 +18,7 @@ export class UserEditComponent implements OnInit {
     password: new FormControl('',[Validators.required]),
   });
 
-  constructor(private route: ActivatedRoute, private userService: UserService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private userService: UserService, private router: Router, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     const role = JSON.parse(localStorage.getItem('user') || '{}');
@@ -38,13 +39,12 @@ export class UserEditComponent implements OnInit {
                 lastName: new FormControl(data.lastName,[Validators.required]),
                 email: new FormControl(data.email,[Validators.required]),
                 password: new FormControl(data.password,[Validators.required]),
+                role: new FormControl(data.role,[Validators.required])
               });
 
             }
           )
         }
-        
-        console.log(route);
       }
 
     )
@@ -54,25 +54,24 @@ export class UserEditComponent implements OnInit {
     console.log(this.userForm.value);
     const form = this.userForm.value;
     const uid = form.id;
-    console.log(form);
-    console.log(uid);
     //call api
     this.userService.updateUser(uid, form).subscribe(
       (data) => {
         console.log(data);
+        this.openSnackBar(form.firstName + ' ' + form.lastName + ' has been updated.', 'Ok');
         this.router.navigate(['home']);
 
       },
       (error) => {
         console.log(error);
+        this.openSnackBar('Error updating.', 'Ok');
         this.router.navigate(['home']);
       }
     )
   }
 
-  removeUser() {
-    // call user service
-    // route to index
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action);
   }
 
 }

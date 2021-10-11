@@ -24,9 +24,9 @@ export class LoginPageComponent implements OnInit {
   constructor(private router: Router, private userService: UserService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    if (this.isLogin)
-      console.log('logged in');
-      // route to user
+    if(localStorage.getItem('user')) {
+      this.router.navigate(['home']);
+    }
   }
 
   login() {

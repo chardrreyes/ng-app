@@ -27,9 +27,6 @@
                           <!-- for image -->
                           <img [src]="u.image" alt="">
                           <a href="#" class="user-link">{{u.firstName}} {{u.lastName}}</a>
-                          <button type="button" class="btn btn-success btn-sm btn-itm-action" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
-                            <i class="bi bi-pen-fill"></i>
-                          </button>
                           <button type="button" class="btn btn-danger btn-sm btn-itm-action" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Remove" (click)="removeUser(i)">
                             <i class="bi bi-trash-fill"></i>
                           </button>

@@ -63,7 +63,7 @@ export class UserIndexComponent implements OnInit {
     // remove user using api
     this.userService.deleteUser(uid).subscribe(
       (data) => {
-        console.log(data);
+        this.openSnackBar(this.users[index].firstName + ' ' + this.users[index].lastName + ' has been removed.', 'Ok');
       },
       (error) => {
         console.log(error);

@@ -1,4 +1,4 @@
-# NgApp
+# People Organizer
 
 ## How to run
 1. `npm install`

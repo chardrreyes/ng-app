@@ -37,7 +37,8 @@ export class LoginPageComponent implements OnInit {
       this.userService.authUser(form).subscribe(
         (data: any) => {
           this.store(data);
-          const fullName = data.firstName + ' ' + data.lastName;
+          //setting default first name and last name incase the data is null
+          const fullName = (data.firstName ? data.firstName : 'Johnson') + ' ' + (data.lastName ? data.lastName : 'Miranda');
           this.openSnackBar('Welcome ' + fullName, 'Ok');
           this.router.navigate(['home']);
         },

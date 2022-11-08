@@ -14,7 +14,9 @@ export interface userId {
 export class UserService {
 
     // change this to your own baseUrl
-    baseUrl = 'https://localhost:44325/api/Users';
+    //.NET Backend
+    // baseUrl = 'https://localhost:44325/api/Users'; //
+    baseUrl = 'https://pokeapi.co/api/v2/pokemon/ditto/';
     
     constructor(private httpClient: HttpClient) {}
 
@@ -91,12 +93,28 @@ export class UserService {
         const httpOptions = {
             headers: new HttpHeaders({'Content-Type': 'application/json'})
         }
-        const body = JSON.stringify(form);
-        const urlRoute = this.baseUrl + '/auth';
-        return this.httpClient.post(urlRoute, body, httpOptions).pipe(
+        // const body = JSON.stringify(form);
+        // const urlRoute = this.baseUrl + '/auth';
+        // console.log(urlRoute)
+        // return this.httpClient.post(urlRoute, body, httpOptions).pipe(
+        //     catchError(this.handle),
+        //     map(
+        //         data => {
+        //             console.log(data)
+        //             return data;
+        //         }
+        //     )
+        // );
+
+        
+        // Uncomment if the backend is up and running
+        const urlRoute = this.baseUrl;
+        console.log(urlRoute)
+        return this.httpClient.get(urlRoute, httpOptions).pipe(
             catchError(this.handle),
             map(
                 data => {
+                    console.log(data)
                     return data;
                 }
             )
